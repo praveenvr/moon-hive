@@ -3,11 +3,11 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "MoonHiveCard": {
+    "MoonHive": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
-      "prefix": "mh-card",
+      "prefix": "mh",
       "schematics": {
         "@schematics/angular:component": {
           "styleext": "scss"
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/MoonHiveCard",
+            "outputPath": "dist/MoonHive",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -61,18 +61,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "MoonHiveCard:build"
+            "browserTarget": "MoonHive:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "MoonHiveCard:build:production"
+              "browserTarget": "MoonHive:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "MoonHiveCard:build"
+            "browserTarget": "MoonHive:build"
           }
         },
         "test": {
@@ -106,7 +106,7 @@
         }
       }
     },
-    "MoonHiveCard-e2e": {
+    "MoonHive-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -115,11 +115,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "MoonHiveCard:serve"
+            "devServerTarget": "MoonHive:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "MoonHiveCard:serve:production"
+              "devServerTarget": "MoonHive:serve:production"
             }
           }
         },
@@ -133,7 +133,42 @@
           }
         }
       }
+    },
+    "MhCard": {
+      "root": "projects/mh-card",
+      "sourceRoot": "projects/mh-card/src",
+      "projectType": "library",
+      "prefix": "Mh",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/mh-card/tsconfig.lib.json",
+            "project": "projects/mh-card/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/mh-card/src/test.ts",
+            "tsConfig": "projects/mh-card/tsconfig.spec.json",
+            "karmaConfig": "projects/mh-card/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/mh-card/tsconfig.lib.json",
+              "projects/mh-card/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
-  "defaultProject": "MoonHiveCard"
+  "defaultProject": "MoonHive"
 }
